@@ -16,33 +16,36 @@ namespace MoPIEDProject.Controllers
     {
         private DBModel db = new DBModel();
 
+        //Here we can retrieve all employees record from the database using this method Get:api/Employee
         // GET: api/Employee
         public IQueryable<Employee> GetEmployees()
         {
             return db.Employees;
         }
 
+        //In this project, we don't use this project
         // GET: api/Employee/5
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult GetEmployee(int id)
-        {
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
+        //[ResponseType(typeof(Employee))]
+        //public IHttpActionResult GetEmployee(int id)
+        //{
+           // Employee employee = db.Employees.Find(id);
+           // if (employee == null)
+           // {
+             //   return NotFound();
+           // }
 
-            return Ok(employee);
-        }
+           // return Ok(employee);
+        //}
+
 
         // PUT: api/Employee/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutEmployee(int id, Employee employee)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+             //   return BadRequest(ModelState);
+            //}
 
             if (id != employee.EmployeeID)
             {
@@ -74,10 +77,10 @@ namespace MoPIEDProject.Controllers
         [ResponseType(typeof(Employee))]
         public IHttpActionResult PostEmployee(Employee employee)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+           // if (!ModelState.IsValid)
+           // {
+             //   return BadRequest(ModelState);
+            //}
 
             db.Employees.Add(employee);
             db.SaveChanges();
