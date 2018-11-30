@@ -23,6 +23,7 @@ export class EmployeeComponent implements OnInit {
 
       form.resetForm();
     }
+
     this.service.formData = {
       EmployeeID: null,
       FullName: '',
@@ -34,14 +35,26 @@ export class EmployeeComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    this.insertRecord(form);
+    if (form.value.EmployeeID == null) {
+      this.insertRecord(form);
+    } else {
+      this.updateRecord(form);
 
+    }
   }
 
   insertRecord(form: NgForm) {
     this.service.postEmployee(form.value).subscribe(res => {
       this.toastr.success('Data Inserted', 'Emp.Book');
       this.resetForm(form);
+      this.service.refreshList();
+    });
+  }
+  updateRecord(form: NgForm) {
+    this.service.putEmployee(form.value).subscribe(res => {
+      this.toastr.info('Data updated', 'Emp.Book');
+      this.resetForm(form);
+      this.service.refreshList();
     });
   }
 }
